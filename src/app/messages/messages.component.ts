@@ -11,6 +11,4 @@ import { NgIf, NgFor } from '@angular/common';
 })
 export class MessagesComponent {
   constructor(public messageService: MessageService) {}
-
-
 }
