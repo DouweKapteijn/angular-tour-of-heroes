@@ -1,7 +1,7 @@
 import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { Hero } from '../hero';
 import { FormsModule } from '@angular/forms';
-import {HEROES} from '../mock-heroes';
+// import {HEROES} from '../mock-heroes';
 import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { HeroService } from '../hero.service';
@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-heroes',
   standalone: true,
   imports: [FormsModule, NgFor, NgIf, UpperCasePipe , HeroDetailComponent, RouterLink,     
-    HttpClientModule,
+    // HttpClientModule,
   ],  
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
