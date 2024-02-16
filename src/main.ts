@@ -9,15 +9,12 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, { 
-  // imports: [HttpClientModule], 
   providers: [
-  // provideHttpClient(), importProvidersFrom([
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),
     importProvidersFrom(
       HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
     ),
-  // ]),
 ]})
 
   .catch((err) => console.error(err));
