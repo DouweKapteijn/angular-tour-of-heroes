@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeroSearchComponent } from './hero-search.component';
 import { HeroService } from '../hero.service';
 import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HeroSearchComponent', () => {
   let component: HeroSearchComponent;
@@ -18,7 +19,7 @@ describe('HeroSearchComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [ HeroSearchComponent ],
+      imports: [ HeroSearchComponent, RouterTestingModule ],
       providers: [{ provide: HeroService, useValue: heroServiceMock }],
     }).compileComponents();
 
