@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+// import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -20,11 +20,11 @@ export class HeroService {
     private messageService: MessageService,
   ) { }
 
-  private log(message: string) {
+  log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }
 
-  private handleError(error: any): Promise<any> {
+  handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
