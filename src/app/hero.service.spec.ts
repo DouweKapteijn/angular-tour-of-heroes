@@ -32,16 +32,19 @@ describe('HeroService', () => {
   const searchHero = 'Test Hero 1';
 
   const mockHeroesApi = {
-    get: jest.fn((id?: number) => {
-      if (!id) {
-        return of(mockHeroes);
-      } else {
-        const hero = mockHeroes.find(hero => hero.id === id);
+    get: jest.fn((query?: number | string) => {
+      if (typeof query === 'string') {
+        const heroes = mockHeroes.filter(hero => hero.name.includes(query));
+        return of(heroes);
+      } else if (typeof query === 'number') {
+        const hero = mockHeroes.find(hero => hero.id === query);
         if (hero) {
           return of(hero);
         } else {
           return of(undefined);
         }
+      } else {
+        return of(mockHeroes);
       }
     }),
     put: jest.fn().mockReturnValue(of(updatedHero)),
@@ -142,20 +145,19 @@ describe('HeroService', () => {
     tick();
   }));
 
-  // it('should search for heroes with search function', fakeAsync (() => {
-  //   jest.spyOn(service, 'searchHeroes').mockImplementation((term) => mockHeroesApi.get(term) as Observable<any[]>);
+  it('should search for heroes with search function', fakeAsync (() => {
+    jest.spyOn(service, 'searchHeroes').mockImplementation((term) => mockHeroesApi.get(term) as Observable<any[]>);
 
-  //   // expect.assertions(1)
+    expect.assertions(1)
 
-  //   service.searchHeroes(searchHero).subscribe(
-  //     hero => {
-  //       // expect(hero).toEqual(mockHero.name);
-  //       console.log(hero, mockHero.name);
-  //     }
-  //   );
-  //   // console.log(searchHero, mockHero.name);
-  //   tick();
-  // }));
+    service.searchHeroes(searchHero).subscribe(
+      hero => {
+        expect(hero).toContain(mockHero);
+        // console.log(hero, mockHero);
+      }
+    );
+    tick();
+  }));
 
   it('should return empty array when search function is empty', fakeAsync (() => {
     jest.spyOn(service, 'searchHeroes');
